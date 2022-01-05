@@ -9,7 +9,9 @@ const NoteList = (props) =>{
 
     return(
         <View style={styles.container}>
-            <FilterNotes />
+            <View style={styles.filter}>
+                <FilterNotes />
+            </View>
             <View style={styles.noteList}>
                 <FlatList 
                     data={props.notes}
@@ -34,11 +36,15 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 60,
         marginBottom: 16,
-        width:'100%',
+    },
+
+    filter:{
+        flexDirection:'row',
+        justifyContent:'flex-start',
     },
 
     noteList:{
-       
+       flex: 1,
     }
 
 })

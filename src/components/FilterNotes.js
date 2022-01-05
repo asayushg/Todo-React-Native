@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 
 const FilterNotes = () => {
 
     return (
-        <View style={styles.container}>
+        <Pressable 
+            style={styles.container}
+            onPress={() => {
+                alert("Select Sort")
+            }}
+        >
             <Text>All Todo</Text>
-        </View>
+            <Image 
+            source={require('../assests/images/arrowdown.png')} 
+            style={styles.icon}/>
+        </Pressable>
     )
 
 }
@@ -16,8 +24,20 @@ export default FilterNotes;
 const styles = StyleSheet.create({
 
     container:{
-        margin: 8,
-        marginStart: '5%'
+        marginStart: '5%',
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        padding: 8,
+        marginBottom: 8
+    },
+
+    icon:{
+        height: 16,
+        width: 16,
+        tintColor: 'black',
+        marginStart: 8
     }
+
 
 })

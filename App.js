@@ -18,10 +18,10 @@ export default function App() {
     {id: 7, text: 'This is a note'},
     {id: 8, text: 'This is a note'},
     {id: 9, text: 'This is a note'},
-    {id: 9, text: 'This is a note'},
-    {id: 9, text: 'This is a note'},
-    {id: 9, text: 'This is a note'},
-    {id: 9, text: 'This is a note'},
+    {id: 10, text: 'This is a note'},
+    {id: 11, text: 'This is a note'},
+    {id: 12, text: 'This is a note'},
+    {id: 13, text: 'This is a note'},
   ]
 
   return (

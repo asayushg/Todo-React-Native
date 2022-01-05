@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
     card:{
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 6,
+        shadowRadius: 4,
         shadowOpacity: 0.26,
-        elevation: 8,
+        elevation: 4,
         backgroundColor: 'white',
         padding: 16,
         borderRadius: 10,
