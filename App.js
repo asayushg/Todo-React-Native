@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './src/components/Header';
 import NewNoteButton from './src/components/NewNoteButton';
@@ -9,33 +9,28 @@ import NoteList from './src/components/NoteList';
 export default function App() {
   
   const notes = [
-    {id: 1, text: 'This is a note'},
-    {id: 2, text: 'This is a note'},
-    {id: 3, text: 'This is a note'},
-    {id: 4, text: 'This is a note'},
-    {id: 5, text: 'This is a note'},
-    {id: 6, text: 'This is a note'},
-    {id: 7, text: 'This is a note'},
-    {id: 8, text: 'This is a note'},
-    {id: 9, text: 'This is a note'},
-    {id: 10, text: 'This is a note'},
-    {id: 11, text: 'This is a note'},
-    {id: 12, text: 'This is a note'},
-    {id: 13, text: 'This is a note'},
+    {id: 1, text: 'This is a todo note', type: 1},
+    {id: 2, text: 'This is a todo note', type: 1},
+    {id: 8, text: 'This is a completed note', type: 2},
+    {id: 9, text: 'This is a completed note', type: 2},
   ]
+
+  const [allNotes, setAllNotes] = useState(notes);
+  const [refresh, setRefresh] = useState(true);
 
   return (
     <View style={styles.container}>
 
       <Header />
 
-      <NewNoteButton
-      newNote={() =>{
-        alert("New Note")
-      }} />
+      <NewNoteButton 
+      allNotes={allNotes}
+      setAllNotes={setAllNotes}
+      refresh={refresh}
+      setRefresh={setRefresh} />
 
       <NoteList
-        notes={notes} 
+        allNotes={allNotes}
       />
 
       <StatusBar style="auto" />

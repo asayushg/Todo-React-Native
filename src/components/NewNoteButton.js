@@ -1,21 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { 
-    View, 
     StyleSheet, 
     Image, 
-    Text,
-    TouchableOpacity, 
-    ImageBackground, 
+    TouchableOpacity,
 } from 'react-native';
+import NewNoteDialog from './NewNoteDialog';
 
 const NewNoteButton = (props) => {
 
+    const [visible, setVisible] = useState(false);
+
     return(
-        <View style={styles.newNote}>
-            <TouchableOpacity onPress={() => props.newNote()}>
-                    <Image style={styles.icon} source={require('../assests/images/plus.png')} />
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.newNote} onPress={() => 
+            setVisible(true)}>
+            <Image style={styles.icon} source={require('../assests/images/plus.png')} />
+            <NewNoteDialog 
+            visible={visible}
+            setVisible={setVisible}
+            allNotes={props.allNotes}
+            setAllNotes={props.setAllNotes} 
+            refresh={props.refresh}
+            setRefresh={props.setRefresh}
+             />
+        </TouchableOpacity>
     )
 
 }

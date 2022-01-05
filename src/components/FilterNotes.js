@@ -1,20 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 
-const FilterNotes = () => {
+const FilterNotes = ({setSortTypeSelected}) => {
 
+    const sortTypes = ["ALL", "TODO", "COMPLETED"];
+    
     return (
-        <Pressable 
-            style={styles.container}
-            onPress={() => {
-                alert("Select Sort")
+        <View style={styles.container}>
+        <SelectDropdown
+            data={sortTypes}
+            onSelect={(selectedItem, index) => {
+                setSortTypeSelected(index);
             }}
-        >
-            <Text>All Todo</Text>
-            <Image 
-            source={require('../assests/images/arrowdown.png')} 
-            style={styles.icon}/>
-        </Pressable>
+            defaultValueByIndex={0}
+            buttonStyle={styles.dropdownBtnStyle}
+            buttonTextStyle={styles.dropdownBtnTxtStyle}
+            dropdownStyle={styles.dropdown}
+            buttonTextAfterSelection={(selectedItem, index) => {
+                    return selectedItem
+                }
+            }
+            rowTextForSelection={(item, index) => {
+                    return item
+                }
+            }
+        />
+        </View>
     )
 
 }
@@ -24,20 +36,24 @@ export default FilterNotes;
 const styles = StyleSheet.create({
 
     container:{
-        marginStart: '5%',
-        flexDirection:'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        padding: 8,
-        marginBottom: 8
+        width: '100%',
     },
 
-    icon:{
-        height: 16,
-        width: 16,
-        tintColor: 'black',
-        marginStart: 8
+    dropdownBtnStyle: {
+        backgroundColor: "#00000000",
+        borderRadius: 8,
+        marginBottom: 8,
+        textAlign: 'center',
+      },
+
+      dropdownBtnTxtStyle: { 
+        color: "black", 
+        textAlign: "center",
+    },
+
+    dropdown:{
+        position: 'absolute'
     }
-
-
+    
 })
