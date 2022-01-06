@@ -40,6 +40,9 @@ export default function App() {
 
       <NoteList
         allNotes={allNotes}
+        setAllNotes={setAllNotes}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
 
       <StatusBar style="auto" />

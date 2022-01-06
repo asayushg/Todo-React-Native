@@ -1,25 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { 
     View,
     Text, 
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
+import NoteStateDialog from './NoteStateDialog';
 
 
 const Note = (props) => {
 
+    const [visible, setVisible] = useState(false);
 
     const handleNotePressed = () =>{
-        
-
-        
+        setVisible(true)
     }
 
+    let typeColor = 'skyblue';
+    if(props.type === 2) typeColor = 'green';
 
     return (
-        <TouchableOpacity style={styles.card} onPress={handleNotePressed}>
+        <TouchableOpacity style={[styles.card, {borderRightColor: typeColor}]} onPress={handleNotePressed}>
             <Text style={styles.text}>{props.text}</Text>
+            <NoteStateDialog 
+                visible={visible}
+                setVisible={setVisible}
+                allNotes={props.allNotes}
+                setAllNotes={props.setAllNotes} 
+                refresh={props.refresh}
+                setRefresh={props.setRefresh}
+                note={
+                    {
+                        text: props.text,
+                        type: props.type
+                    }    
+                }
+            />
         </TouchableOpacity>
     )
 
@@ -42,6 +58,7 @@ const styles = StyleSheet.create({
         marginRight: '5%',
         flexDirection:'row',
         marginBottom: 8,
+        borderRightWidth: 10
     },
 
     text:{

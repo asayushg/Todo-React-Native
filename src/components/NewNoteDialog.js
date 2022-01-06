@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import Dialog from "react-native-dialog";
 import SaveTodoList from '../Utils';
 
@@ -20,15 +20,27 @@ const NewNoteDialog = (props) => {
     const handleOkay = () => {
         props.setVisible(false);
         let notes = props.allNotes;
-        notes.push({
-            text: newNote,
-            type: 1
-        });
-       if(newNote) {
-           props.setAllNotes(notes);
-           props.setRefresh(!props.refresh);
-           SaveTodoList(notes);
-       }
+
+        let found = false;
+        for(var i = 0; i < notes.length; i++) {
+            if (notes[i].text === newNote && notes[i].type === 1 ) {
+                found = true;
+                break;
+            }
+        }
+        if(!found) {
+            notes.push({
+                text: newNote,
+                type: 1
+            });
+            if(newNote) {
+                props.setAllNotes(notes);
+                props.setRefresh(!props.refresh);
+                SaveTodoList(notes);
+            }
+        }else{
+            alert("Todo already present");
+        }
     };
 
     return (

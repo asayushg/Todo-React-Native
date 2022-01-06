@@ -12,14 +12,18 @@ const NoteList = (props) =>{
     
     
     useEffect(() => {
-
+        setNotes([]);
         if(sortTypeSelected === 0 ) setNotes(props.allNotes);
         else 
         setNotes( props.allNotes.filter( function (item){
             return item.type === sortTypeSelected;
         }
         ) )
+
+        props.setRefresh(!props.refresh);
      }, [sortTypeSelected, props.allNotes])
+
+     console.log(notes);
 
     return(
         <View style={styles.container}>
@@ -30,10 +34,15 @@ const NoteList = (props) =>{
                     data={notes}
                     renderItem={({item}) => {
                         return (
-                            <Note text={item.text} />
+                            <Note 
+                                text={item.text}
+                                type={item.type}
+                                allNotes={props.allNotes}
+                                setAllNotes={props.setAllNotes}
+                                refresh={props.refresh}
+                                setRefresh={props.setRefresh} />
                         )
                     }}
-                    keyExtractor={item => item.text}
                     showsVerticalScrollIndicator={false}
                     extraData={props.refresh}
                 />
