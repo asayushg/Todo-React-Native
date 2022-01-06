@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import Dialog from "react-native-dialog";
+import SaveTodoList from '../Utils';
+
 
 const NewNoteDialog = (props) => {
 
@@ -19,13 +21,13 @@ const NewNoteDialog = (props) => {
         props.setVisible(false);
         let notes = props.allNotes;
         notes.push({
-            id: 6,
             text: newNote,
             type: 1
         });
        if(newNote) {
            props.setAllNotes(notes);
-           props.setRefresh(!props.refresh)
+           props.setRefresh(!props.refresh);
+           SaveTodoList(notes);
        }
     };
 

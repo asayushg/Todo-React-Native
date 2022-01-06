@@ -2,22 +2,31 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 
-const Header = () => {
+const Header = (props) => {
+
+    let total = 0;
+    let todo = 0;
+
+    total = props.allNotes.length;
+    todo = props.allNotes.filter( function (item){
+        return item.type === 1;
+    }).length;
+
 
     return( 
         <View style={styles.header}>
             <Text style={styles.text}>All Tasks</Text>
             <View style={styles.card}>
             <View>
-                    <Text style={styles.tasknum}>27</Text>
+                    <Text style={styles.tasknum}>{total}</Text>
                     <Text style={styles.tasktype}>All</Text>
                 </View>
                 <View>
-                    <Text style={styles.tasknum}>20</Text>
+                    <Text style={styles.tasknum}>{total - todo}</Text>
                     <Text style={styles.tasktype}>Completed</Text>
                 </View>
                 <View>
-                    <Text style={styles.tasknum}>7</Text>
+                    <Text style={styles.tasknum}>{todo}</Text>
                     <Text style={styles.tasktype}>Todo</Text>
                 </View>
             </View>

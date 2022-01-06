@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import FilterNotes from './FilterNotes';
 import Note from './Note';
 
@@ -7,20 +7,24 @@ const NoteList = (props) =>{
 
     const [sortTypeSelected, setSortTypeSelected] = useState(0);
     const [notes, setNotes] = useState([]);
+    console.log("list");
     console.log(props.allNotes);
-     useEffect(() => {
+    
+    
+    useEffect(() => {
 
-        if(sortTypeSelected === 0) setNotes(props.allNotes)
+        if(sortTypeSelected === 0 ) setNotes(props.allNotes);
         else 
         setNotes( props.allNotes.filter( function (item){
             return item.type === sortTypeSelected;
         }
         ) )
-     }, [sortTypeSelected])
+     }, [sortTypeSelected, props.allNotes])
 
     return(
         <View style={styles.container}>
             <FilterNotes setSortTypeSelected={setSortTypeSelected}/>
+            { notes.length === 0  ? <Text style= {{textAlign: 'center', marginTop: 100}}>No Todo Found! </Text>  : <></>}
             <View style={styles.noteList}>
                 <FlatList 
                     data={notes}
@@ -29,7 +33,7 @@ const NoteList = (props) =>{
                             <Note text={item.text} />
                         )
                     }}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.text}
                     showsVerticalScrollIndicator={false}
                     extraData={props.refresh}
                 />

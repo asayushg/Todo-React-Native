@@ -1,27 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { AsyncStorage, StyleSheet, Text, View } from 'react-native';
 import Header from './src/components/Header';
 import NewNoteButton from './src/components/NewNoteButton';
 import NoteList from './src/components/NoteList';
 
 
-export default function App() {
-  
-  const notes = [
-    {id: 1, text: 'This is a todo note', type: 1},
-    {id: 2, text: 'This is a todo note', type: 1},
-    {id: 8, text: 'This is a completed note', type: 2},
-    {id: 9, text: 'This is a completed note', type: 2},
-  ]
 
-  const [allNotes, setAllNotes] = useState(notes);
+export default function App() {
+
+  const [allNotes, setAllNotes] = useState([]);
   const [refresh, setRefresh] = useState(true);
+
+  useEffect(() => {
+    
+    AsyncStorage.getItem("TODO")
+    .then(stringifiedTodos => {
+      const parsedTodos = JSON.parse(stringifiedTodos);
+      if (!parsedTodos || typeof parsedTodos !== 'object') return;
+      setAllNotes(parsedTodos);
+    })
+    .catch(err => {
+      console.warn('Error restoring todos from async');
+      console.warn(err);
+    });
+
+  }, [])
 
   return (
     <View style={styles.container}>
 
-      <Header />
+      <Header allNotes={allNotes} />
 
       <NewNoteButton 
       allNotes={allNotes}
