@@ -23,11 +23,11 @@ const Header = (props) => {
                 </View>
                 <View>
                     <Text style={styles.tasknum}>{total - todo}</Text>
-                    <Text style={styles.tasktype}>Completed</Text>
+                    <Text style={[styles.tasktype, {borderBottomColor: 'green', borderBottomWidth: 4}]}>Completed</Text>
                 </View>
                 <View>
                     <Text style={styles.tasknum}>{todo}</Text>
-                    <Text style={styles.tasktype}>Todo</Text>
+                    <Text style={[styles.tasktype, {borderBottomColor: 'skyblue', borderBottomWidth: 4}]}>Todo</Text>
                 </View>
             </View>
         </View>
@@ -87,7 +87,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color:'black',
         fontWeight: '300',
-        textAlign:'center'
+        textAlign:'center',
+        borderBottomLeftRadius: 4,
+        borderBottomRightRadius: 4
     }
 
 })
